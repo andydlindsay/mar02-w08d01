@@ -30,3 +30,16 @@ export const chooseRobotItem = (cheating, playerSelection) => {
     return options[randomIndex];
   }
 };
+
+export const genFeedbackMessage = (status) => {
+  switch (status) {
+    case 'Won':
+      return 'Good job!';
+    case 'Lost':
+      return 'You lost!';
+    case 'Tied':
+      return 'Tie game!';
+    default:
+      return 'Waiting for your choice!';
+  }
+};
