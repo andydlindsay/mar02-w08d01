@@ -6,15 +6,17 @@ describe('Game Component', () => {
 
   test('change the cheat state when robot icon is clicked', () => {
     const { container, getByTestId, debug } = render(<Game />);
+
     // const robotIcon = getByTestId(container, 'robot-icon');
     const robotIcon = getByTestId('robot-icon');
-    const dom = prettyDOM(container);
+    
+    // const dom = prettyDOM(container);
     // console.log(dom);
     
     fireEvent.click(robotIcon);
     expect(robotIcon).toHaveClass('cheating');
     
-    debug();
+    // debug();
     fireEvent.click(robotIcon);
     expect(robotIcon).not.toHaveClass('cheating');
   });

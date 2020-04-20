@@ -27,20 +27,18 @@ test('shows appropriate message when the status is "Waiting"', () => {
   expect(getByTestId(container, 'result_footer')).toHaveTextContent('Waiting for your choice!');
 });
 
+// this function must be marked as `async` in order to use `await` within it
 test('Axios test', async () => {
-  const fakeState = {
-    compSelection: null,
-    playerSelection: null,
-    status: 'Waiting',
-    cheating: false
-  };
-  
-  const { container, getByTestId, findByText } = render(<Result status={fakeState.status} />);
+  const { getByTestId, findByText } = render(<Result status="Waiting" />);
   const button = getByTestId('fetch-highscores');
+
+  // mock any calls to axios.get with hardcoded return value `data`
   axios.get.mockResolvedValueOnce({ data });
 
+  // firing this event causes the axios call to happen
   fireEvent.click(button);
 
+  // findBy functions return a promise which we can `await`
   await findByText('Bob');
 });
 
@@ -55,5 +53,6 @@ test('functions', () => {
 
   const mockFn2 = jest.fn(() => 'world');
   result = mockFn2('hello');
+  
   expect(result).toBe('world');
 });
