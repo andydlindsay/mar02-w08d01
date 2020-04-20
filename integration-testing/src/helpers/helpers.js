@@ -15,3 +15,18 @@ export const announceResult = (playerSelection, compSelection) => {
   }
   return 'Tied';
 };
+
+export const chooseRobotItem = (cheating, playerSelection) => {
+  const lookup = {
+    Axe: 'Moai',
+    Tree: 'Axe',
+    Moai: 'Tree'
+  };
+  if (cheating) {
+    return lookup[playerSelection];
+  } else {
+    const options = ['Axe', 'Moai', 'Tree'];
+    const randomIndex = Math.floor(Math.random() * options.length);
+    return options[randomIndex];
+  }
+};
