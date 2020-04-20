@@ -8,3 +8,8 @@
 - [ ] Coverage Reports
 - [ ] Add Features to our App Following TDD
 - [ ] `debug()` and `prettyDOM()`
+- [ ] Mocking an AJAX Request
+
+
+
+
