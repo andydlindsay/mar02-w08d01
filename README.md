@@ -7,4 +7,4 @@
 - [ ] Tools for testing React
 - [ ] Coverage Reports
 - [ ] Add Features to our App Following TDD
-- [ ] `debug()` and `prettyDOM`
+- [ ] `debug()` and `prettyDOM()`
