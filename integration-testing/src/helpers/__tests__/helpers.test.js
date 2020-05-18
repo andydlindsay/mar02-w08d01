@@ -1,4 +1,4 @@
-import { announceResult } from '../helpers'
+import { announceResult, chooseRobotItem, genFeedbackMessage } from '../helpers'
 
 let fakeState;
 
@@ -32,5 +32,46 @@ describe('announceResult function', () => {
 
   test('returns "Waiting" if nothing is passed in', () => {
     expect(announceResult()).toBe('Waiting');
+  });
+});
+
+describe('chooseRobotItem function', () => {
+  test('given a player choice and cheating is true, return winning item', () => {
+    fakeState.cheating = true;
+
+    fakeState.playerSelection = 'Axe';
+    let result = chooseRobotItem(fakeState.cheating, fakeState.playerSelection);
+    expect(result).toBe('Moai');
+
+    fakeState.playerSelection = 'Tree';
+    result = chooseRobotItem(fakeState.cheating, fakeState.playerSelection);
+    expect(result).toBe('Axe');
+
+    fakeState.playerSelection = 'Moai';
+    result = chooseRobotItem(fakeState.cheating, fakeState.playerSelection);
+    expect(result).toBe('Tree');
+  });
+
+  test('given a player choice and cheating is false, return a valid choice', () => {
+    fakeState.cheating = false;
+
+    fakeState.playerSelection = 'Axe';
+    const result = chooseRobotItem(fakeState.cheating, fakeState.playerSelection);
+    const options = ['Axe', 'Moai', 'Tree'];
+    expect(options.includes(result)).toBeTruthy();
+  });
+});
+
+describe('genFeedbackMessage function', () => {
+  test('returns correct message when given a status', () => {
+    const loss = genFeedbackMessage('Lost');
+    const win = genFeedbackMessage('Won');
+    const tie = genFeedbackMessage('Tied');
+    const waiting = genFeedbackMessage('Waiting');
+
+    expect(loss).toEqual('You lost!');
+    expect(win).toEqual('Good job!');
+    expect(tie).toEqual('Tie game!');
+    expect(waiting).toEqual('Waiting for your choice!');
   });
 });
